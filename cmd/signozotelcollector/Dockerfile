@@ -1,8 +1,14 @@
 # use a minimal debian image
 FROM debian:bookworm-slim
 
+# Configurable Debian apt mirror. Defaults to Aliyun because the upstream
+# deb.debian.org is unreachable from the typical build host for this fork.
+# Override for CI / non-China builds: --build-arg APT_MIRROR=deb.debian.org
+ARG APT_MIRROR=mirrors.aliyun.com
+
 # add ca-certificates in case you need them
-RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
+RUN sed -i "s|deb.debian.org|${APT_MIRROR}|g" /etc/apt/sources.list.d/debian.sources \
+ && apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
 
 # define arguments and default values
 ARG TARGETOS TARGETARCH
