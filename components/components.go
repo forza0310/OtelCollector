@@ -28,15 +28,11 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/signaltometricsconnector"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/spanmetricsconnector"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/sumconnector"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/azureauthextension"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/basicauthextension"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/bearertokenauthextension"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/healthcheckextension"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/jaegerremotesampling"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/oauth2clientauthextension"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/dockerobserver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/ecsobserver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/ecstaskobserver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/hostobserver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/k8sobserver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/oidcauthextension"
@@ -208,11 +204,8 @@ func CoreComponents(
 		basicauthextension.NewFactory(),
 		bearertokenauthextension.NewFactory(),
 		dockerobserver.NewFactory(),
-		ecsobserver.NewFactory(),
-		ecstaskobserver.NewFactory(),
 		filestorage.NewFactory(),
 		hostobserver.NewFactory(),
-		jaegerremotesampling.NewFactory(),
 		k8sobserver.NewFactory(),
 		oauth2clientauthextension.NewFactory(),
 		oidcauthextension.NewFactory(),
@@ -220,7 +213,6 @@ func CoreComponents(
 		pprofextension.NewFactory(),
 		signozhealthcheckextension.NewFactory(),
 		zpagesextension.NewFactory(),
-		azureauthextension.NewFactory(),
 	)
 	extensionsMap, err := otelcol.MakeFactoryMap(extensions...)
 	if err != nil {

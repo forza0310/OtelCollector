@@ -40,15 +40,11 @@ require (
 	github.com/open-telemetry/opentelemetry-collector-contrib/connector/spanmetricsconnector v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/connector/sumconnector v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/exporter/prometheusexporter v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/extension/azureauthextension v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/extension/basicauthextension v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/extension/bearertokenauthextension v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/extension/healthcheckextension v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/extension/jaegerremotesampling v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/extension/oauth2clientauthextension v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/dockerobserver v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/ecsobserver v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/ecstaskobserver v0.139.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/hostobserver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/k8sobserver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/extension/oidcauthextension v0.144.0
@@ -476,7 +472,6 @@ require (
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
-	github.com/gogo/googleapis v1.4.1 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.4 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
