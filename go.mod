@@ -137,7 +137,6 @@ require (
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/httpcheckreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/huaweicloudcesreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/icmpcheckreceiver v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/jaegerreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/jmxreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/journaldreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/k8sclusterreceiver v0.144.0
@@ -165,7 +164,6 @@ require (
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/receivercreator v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/redfishreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/simpleprometheusreceiver v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/skywalkingreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/snmpreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/solacereceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/sshcheckreceiver v0.144.0
@@ -180,7 +178,6 @@ require (
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/windowsperfcountersreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/windowsservicereceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/yanggrpcreceiver v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/zipkinreceiver v0.144.0
 	github.com/pkg/errors v0.9.1
 	github.com/redis/go-redis/v9 v9.17.2
 	github.com/segmentio/ksuid v1.0.4
@@ -557,7 +554,6 @@ require (
 	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/translator/loki v0.144.0 // indirect
 	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/translator/prometheus v0.144.0 // indirect
 	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/translator/prometheusremotewrite v0.144.0 // indirect
-	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/translator/skywalking v0.144.0 // indirect
 	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/winperfcounters v0.144.0 // indirect
 	github.com/open-telemetry/otel-arrow/go v0.46.0 // indirect
 	github.com/opencontainers/cgroups v0.0.6 // indirect
@@ -704,7 +700,6 @@ require (
 	sigs.k8s.io/randfill v1.0.0 // indirect
 	sigs.k8s.io/structured-merge-diff/v6 v6.3.0 // indirect
 	sigs.k8s.io/yaml v1.6.0 // indirect
-	skywalking.apache.org/repo/goapi v0.0.0-20240104145220-ba7202308dd4 // indirect
 )
 
 require (

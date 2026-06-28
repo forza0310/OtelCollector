@@ -29,7 +29,6 @@ import (
 	"go.opentelemetry.io/collector/receiver/otlpreceiver"
 
 	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/prometheusexporter"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/jaegerreceiver"
 
 	"github.com/SigNoz/signoz-otel-collector/processor/signozspanmetricsprocessor/internal/metadata"
 )
@@ -95,7 +94,6 @@ func TestLoadConfig(t *testing.T) {
 			require.NoError(t, err)
 
 			factories.Receivers[component.MustNewType("otlp")] = otlpreceiver.NewFactory()
-			factories.Receivers[component.MustNewType("jaeger")] = jaegerreceiver.NewFactory()
 
 			factories.Processors[metadata.Type] = NewFactory()
 			factories.Processors[component.MustNewType("batch")] = batchprocessor.NewFactory()

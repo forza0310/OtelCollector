@@ -121,7 +121,6 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/httpcheckreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/huaweicloudcesreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/icmpcheckreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/jaegerreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/jmxreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/journaldreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/k8sclusterreceiver"
@@ -149,7 +148,6 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/receivercreator"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/redfishreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/simpleprometheusreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/skywalkingreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/snmpreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/solacereceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/sshcheckreceiver"
@@ -164,7 +162,6 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/windowsperfcountersreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/windowsservicereceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/yanggrpcreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/zipkinreceiver"
 	"go.opentelemetry.io/collector/connector"
 	"go.opentelemetry.io/collector/connector/forwardconnector"
 	"go.opentelemetry.io/collector/exporter"
@@ -215,7 +212,6 @@ func Components() (otelcol.Factories, error) {
 		hostmetricsreceiver.NewFactory(),
 		httpcheckreceiver.NewFactory(),
 		httplogreceiver.NewFactory(),
-		jaegerreceiver.NewFactory(),
 		jmxreceiver.NewFactory(),
 		journaldreceiver.NewFactory(),
 		k8sclusterreceiver.NewFactory(),
@@ -237,7 +233,6 @@ func Components() (otelcol.Factories, error) {
 		rabbitmqreceiver.NewFactory(),
 		receivercreator.NewFactory(),
 		simpleprometheusreceiver.NewFactory(),
-		skywalkingreceiver.NewFactory(),
 		snmpreceiver.NewFactory(),
 		solacereceiver.NewFactory(),
 		sshcheckreceiver.NewFactory(),
@@ -247,7 +242,6 @@ func Components() (otelcol.Factories, error) {
 		webhookeventreceiver.NewFactory(),
 		windowseventlogreceiver.NewFactory(),
 		windowsperfcountersreceiver.NewFactory(),
-		zipkinreceiver.NewFactory(),
 		ciscoosreceiver.NewFactory(),
 		envoyalsreceiver.NewFactory(),
 		gitlabreceiver.NewFactory(),

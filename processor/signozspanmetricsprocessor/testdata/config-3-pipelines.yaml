@@ -6,10 +6,10 @@
 # The reason for requiring a proxy pipeline is because only exporters are
 # capable of directly consuming data.
 receivers:
-  jaeger:
+  otlp/jaeger:
     protocols:
-      thrift_http:
-        endpoint: "0.0.0.0:14278"
+      grpc:
+        endpoint: "localhost:14250"
 
   otlp:
     protocols:
@@ -45,7 +45,7 @@ processors:
 service:
   pipelines:
     traces:
-      receivers: [jaeger]
+      receivers: [otlp/jaeger]
       # spanmetrics will pass on span data untouched to next processor
       # while also accumulating metrics to be sent to the configured 'otlp/spanmetrics' exporter.
       processors: [signozspanmetrics, batch]

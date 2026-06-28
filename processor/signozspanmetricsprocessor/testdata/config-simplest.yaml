@@ -1,10 +1,10 @@
 # A minimal configuration where spanprocessor optional config entries are omitted,
 # accepting defaults. Note that metrics are exported directly to prometheus in this case.
 receivers:
-  jaeger:
+  otlp/jaeger:
     protocols:
-      thrift_http:
-        endpoint: "0.0.0.0:14278"
+      grpc:
+        endpoint: "localhost:14250"
 
   # Dummy receiver that's never used, because a pipeline is required to have one.
   otlp/spanmetrics:
@@ -29,7 +29,7 @@ processors:
 service:
   pipelines:
     traces:
-      receivers: [jaeger]
+      receivers: [otlp/jaeger]
       # spanmetrics will pass on span data untouched to next processor
       # while also accumulating metrics to be sent to the configured 'prometheus' exporter.
       processors: [signozspanmetrics, batch]
