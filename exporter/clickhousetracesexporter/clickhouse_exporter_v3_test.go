@@ -15,6 +15,7 @@ import (
 	"github.com/jellydator/ttlcache/v3"
 	cmock "github.com/srikanthccv/ClickHouse-go-mock"
 	"github.com/stretchr/testify/assert"
+	"go.opencensus.io/stats/view"
 	"go.opentelemetry.io/collector/component"
 	"go.opentelemetry.io/collector/exporter"
 	"go.opentelemetry.io/collector/pdata/pcommon"
@@ -606,7 +607,6 @@ func TestExporterInit(t *testing.T) {
 }
 
 func TestExporterPushTracesData(t *testing.T) {
-	t.Skip("flaky: depends on UsageCollector periodic timer firing within 10s; sqlmock expectation 'distributed_usage INSERT' never satisfied in CI/local. Skipped during downstream slim work.")
 	mock, err := cmock.NewClickHouseWithQueryMatcher(nil, sqlmock.QueryMatcherRegexp)
 	if err != nil {
 		log.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
@@ -642,6 +642,12 @@ func TestExporterPushTracesData(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to push traces data: %v", err)
 	}
+
+	// opencensus stats.RecordWithTags is async (records are enqueued to a worker goroutine).
+	// view.RetrieveData goes through the same worker FIFO channel, so calling it here
+	// synchronously drains any pending records into the view before Shutdown -> Flush reads it.
+	_, _ = view.RetrieveData(SigNozSpansCount)
+	_, _ = view.RetrieveData(SigNozSpansBytes)
 
 	err = exporter.Shutdown(context.Background())
 	assert.Nil(t, err)

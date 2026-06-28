@@ -21,7 +21,6 @@ import (
 )
 
 func TestTracesToMetrics(t *testing.T) {
-	t.Skip("flaky: passes in isolation but fails under -count=1 full-suite ordering. Skipped during downstream slim work.")
 	testCases := []struct {
 		name string
 		cfg  *Config
@@ -34,7 +33,7 @@ func TestTracesToMetrics(t *testing.T) {
 						Name: "resource.0",
 					},
 				},
-				MetricsFlushInterval: time.Millisecond,
+				MetricsFlushInterval: 50 * time.Millisecond,
 			},
 		},
 	}
@@ -58,17 +57,18 @@ func TestTracesToMetrics(t *testing.T) {
 			testSpans := ptracesgen.Generate(ptracesgen.WithSpanCount(10), ptracesgen.WithResourceAttributeStringValue("unknown_service"))
 			assert.NoError(t, conn.ConsumeTraces(context.Background(), testSpans))
 
-			// Wait for the metrics to be flushed based on the MetricsFlushInterval
-			time.Sleep(tc.cfg.MetricsFlushInterval * 2)
-			// only 2 metrics for span size and span count will be exported
-			assert.Equal(t, 2, sink.DataPointCount())
-
+			// Wait for the ticker to flush the buffered metrics. Don't rely on a fixed sleep
+			// matching MetricsFlushInterval — under concurrent test load the ticker goroutine
+			// may not be scheduled in time. Poll until the expected count appears.
+			// Only 2 metrics for span size and span count will be exported.
+			assert.Eventually(t, func() bool {
+				return sink.DataPointCount() == 2
+			}, 2*time.Second, 10*time.Millisecond)
 		})
 	}
 }
 
 func TestMetricsToMetrics(t *testing.T) {
-	t.Skip("flaky: same family as TestTracesToMetrics — passes in isolation/single-package, fails under full ./... ordering. Skipped during downstream slim work.")
 	testCases := []struct {
 		name string
 		cfg  *Config
@@ -81,7 +81,7 @@ func TestMetricsToMetrics(t *testing.T) {
 						Name: "resource.attr_0",
 					},
 				},
-				MetricsFlushInterval: time.Millisecond,
+				MetricsFlushInterval: 50 * time.Millisecond,
 			},
 		},
 	}
@@ -109,17 +109,16 @@ func TestMetricsToMetrics(t *testing.T) {
 			), pmetricsgen.WithResourceAttributeStringValue("unknown_service"))
 			assert.NoError(t, conn.ConsumeMetrics(context.Background(), testMetrics))
 
-			// Wait for the metrics to be flushed based on the MetricsFlushInterval
-			time.Sleep(tc.cfg.MetricsFlushInterval * 2)
-			// only 2 metrics for span size and span count will be exported
-			assert.Equal(t, 2, sink.DataPointCount())
-
+			// Poll for the ticker-driven flush instead of relying on a fixed sleep
+			// (see TestTracesToMetrics for rationale).
+			assert.Eventually(t, func() bool {
+				return sink.DataPointCount() == 2
+			}, 2*time.Second, 10*time.Millisecond)
 		})
 	}
 }
 
 func TestLogsToMetrics(t *testing.T) {
-	t.Skip("flaky: same family as TestTracesToMetrics — passes in isolation/single-package, fails under full ./... ordering. Skipped during downstream slim work.")
 	testCases := []struct {
 		name string
 		cfg  *Config
@@ -132,7 +131,7 @@ func TestLogsToMetrics(t *testing.T) {
 						Name: "resource.0",
 					},
 				},
-				MetricsFlushInterval: time.Millisecond,
+				MetricsFlushInterval: 50 * time.Millisecond,
 			},
 		},
 	}
@@ -156,11 +155,11 @@ func TestLogsToMetrics(t *testing.T) {
 			testSpans := plogsgen.Generate()
 			assert.NoError(t, conn.ConsumeLogs(context.Background(), testSpans))
 
-			// Wait for the metrics to be flushed based on the MetricsFlushInterval
-			time.Sleep(tc.cfg.MetricsFlushInterval * 2)
-			// only 2 metrics for span size and span count will be exported
-			assert.Equal(t, 2, sink.DataPointCount())
-
+			// Poll for the ticker-driven flush instead of relying on a fixed sleep
+			// (see TestTracesToMetrics for rationale).
+			assert.Eventually(t, func() bool {
+				return sink.DataPointCount() == 2
+			}, 2*time.Second, 10*time.Millisecond)
 		})
 	}
 }

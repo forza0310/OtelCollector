@@ -18,6 +18,7 @@ import (
 	"go.opentelemetry.io/collector/exporter"
 	"go.opentelemetry.io/collector/pdata/pcommon"
 	"go.opentelemetry.io/otel/metric/noop"
+	"go.opencensus.io/stats/view"
 	"go.uber.org/zap"
 
 	"github.com/SigNoz/signoz-otel-collector/exporter/clickhouselogsexporter/internal/metadata"
@@ -120,7 +121,6 @@ func TestExporterInit(t *testing.T) {
 }
 
 func TestExporterPushLogsData(t *testing.T) {
-	t.Skip("flaky: depends on UsageCollector periodic timer firing within 10s; sqlmock expectation 'distributed_usage INSERT' never satisfied in CI/local. Skipped during downstream slim work.")
 	mock, err := cmock.NewClickHouseWithQueryMatcher(nil, sqlmock.QueryMatcherRegexp)
 	if err != nil {
 		log.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
@@ -156,6 +156,12 @@ func TestExporterPushLogsData(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to push logs data: %v", err)
 	}
+
+	// opencensus stats.RecordWithTags is async (records are enqueued to a worker goroutine).
+	// view.RetrieveData goes through the same worker FIFO channel, so calling it here
+	// synchronously drains any pending records into the view before Shutdown -> Flush reads it.
+	_, _ = view.RetrieveData(SigNozLogsCount)
+	_, _ = view.RetrieveData(SigNozLogsBytes)
 
 	err = exporter.Shutdown(context.Background())
 	assert.Nil(t, err)
