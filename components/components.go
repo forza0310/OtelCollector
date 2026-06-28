@@ -105,11 +105,9 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/ciscoosreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/cloudflarereceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/cloudfoundryreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/datadogreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/dockerstatsreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/envoyalsreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/expvarreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/faroreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/filelogreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/filestatsreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/fluentforwardreceiver"
@@ -133,7 +131,6 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kafkametricsreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kafkareceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kubeletstatsreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/libhoneyreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/lokireceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/macosunifiedloggingreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/namedpipereceiver"
@@ -148,27 +145,20 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusremotewritereceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/pulsarreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/purefareceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/purefbreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/rabbitmqreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/receivercreator"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/redfishreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/signalfxreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/simpleprometheusreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/skywalkingreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/snmpreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/solacereceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/splunkenterprisereceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/splunkhecreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/sshcheckreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/stefreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/syslogreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/systemdreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/tcpcheckreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/tcplogreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/tlscheckreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/udplogreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/wavefrontreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/webhookeventreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/windowseventlogreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/windowsperfcountersreceiver"
@@ -213,7 +203,6 @@ func Components() (otelcol.Factories, error) {
 		clickhousesystemtablesreceiver.NewFactory(),
 		cloudflarereceiver.NewFactory(),
 		cloudfoundryreceiver.NewFactory(),
-		datadogreceiver.NewFactory(),
 		dockerstatsreceiver.NewFactory(),
 		expvarreceiver.NewFactory(),
 		filelogreceiver.NewFactory(),
@@ -245,41 +234,32 @@ func Components() (otelcol.Factories, error) {
 		prometheusreceiver.NewFactory(),
 		prometheusremotewritereceiver.NewFactory(),
 		pulsarreceiver.NewFactory(),
-		purefareceiver.NewFactory(),
-		purefbreceiver.NewFactory(),
 		rabbitmqreceiver.NewFactory(),
 		receivercreator.NewFactory(),
-		signalfxreceiver.NewFactory(),
 		simpleprometheusreceiver.NewFactory(),
 		skywalkingreceiver.NewFactory(),
 		snmpreceiver.NewFactory(),
 		solacereceiver.NewFactory(),
-		splunkenterprisereceiver.NewFactory(),
-		splunkhecreceiver.NewFactory(),
 		sshcheckreceiver.NewFactory(),
 		syslogreceiver.NewFactory(),
 		tcplogreceiver.NewFactory(),
 		udplogreceiver.NewFactory(),
-		wavefrontreceiver.NewFactory(),
 		webhookeventreceiver.NewFactory(),
 		windowseventlogreceiver.NewFactory(),
 		windowsperfcountersreceiver.NewFactory(),
 		zipkinreceiver.NewFactory(),
 		ciscoosreceiver.NewFactory(),
 		envoyalsreceiver.NewFactory(),
-		faroreceiver.NewFactory(),
 		gitlabreceiver.NewFactory(),
 		googlecloudpubsubpushreceiver.NewFactory(),
 		huaweicloudcesreceiver.NewFactory(),
 		icmpcheckreceiver.NewFactory(),
 		k8slogreceiver.NewFactory(),
-		libhoneyreceiver.NewFactory(),
 		macosunifiedloggingreceiver.NewFactory(),
 		netflowreceiver.NewFactory(),
 		ntpreceiver.NewFactory(),
 		pprofreceiver.NewFactory(),
 		redfishreceiver.NewFactory(),
-		stefreceiver.NewFactory(),
 		systemdreceiver.NewFactory(),
 		tcpcheckreceiver.NewFactory(),
 		tlscheckreceiver.NewFactory(),
