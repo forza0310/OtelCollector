@@ -8,7 +8,6 @@ import (
 	"github.com/SigNoz/signoz-otel-collector/exporter/metadataexporter"
 	"github.com/SigNoz/signoz-otel-collector/exporter/signozclickhousemeter"
 	"github.com/SigNoz/signoz-otel-collector/exporter/signozclickhousemetrics"
-	"github.com/SigNoz/signoz-otel-collector/exporter/signozkafkaexporter"
 	signozhealthcheckextension "github.com/SigNoz/signoz-otel-collector/extension/healthcheckextension"
 	_ "github.com/SigNoz/signoz-otel-collector/pkg/parser/grok"
 	"github.com/SigNoz/signoz-otel-collector/processor/signozlogspipelineprocessor"
@@ -33,20 +32,6 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/slowsqlconnector"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/spanmetricsconnector"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/sumconnector"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/alertmanagerexporter"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/awskinesisexporter"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/awss3exporter"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/cassandraexporter"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/fileexporter"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/googlecloudpubsubexporter"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/kafkaexporter"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/loadbalancingexporter"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/prometheusexporter"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/prometheusremotewriteexporter"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/pulsarexporter"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/rabbitmqexporter"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/syslogexporter"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/zipkinexporter"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/azureauthextension"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/basicauthextension"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/bearertokenauthextension"
@@ -150,27 +135,12 @@ func Components() (otelcol.Factories, error) {
 	}
 
 	exporters := []exporter.Factory{
-		alertmanagerexporter.NewFactory(),
-		awskinesisexporter.NewFactory(),
-		awss3exporter.NewFactory(),
-		cassandraexporter.NewFactory(),
 		clickhouselogsexporter.NewFactory(),
 		signozclickhousemetrics.NewFactory(),
 		clickhousetracesexporter.NewFactory(),
 		debugexporter.NewFactory(),
-		fileexporter.NewFactory(),
-		googlecloudpubsubexporter.NewFactory(),
 		jsontypeexporter.NewFactory(),
-		kafkaexporter.NewFactory(),
-		loadbalancingexporter.NewFactory(),
 		metadataexporter.NewFactory(),
-		prometheusexporter.NewFactory(),
-		prometheusremotewriteexporter.NewFactory(),
-		pulsarexporter.NewFactory(),
-		rabbitmqexporter.NewFactory(),
-		signozkafkaexporter.NewFactory(),
-		syslogexporter.NewFactory(),
-		zipkinexporter.NewFactory(),
 		nopexporter.NewFactory(),
 		signozclickhousemeter.NewFactory(),
 	}
