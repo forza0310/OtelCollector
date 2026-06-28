@@ -19,17 +19,13 @@ import (
 	"github.com/SigNoz/signoz-otel-collector/receiver/signozawsfirehosereceiver"
 	"github.com/SigNoz/signoz-otel-collector/receiver/signozkafkareceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/countconnector"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/datadogconnector"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/exceptionsconnector"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/failoverconnector"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/grafanacloudconnector"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/metricsaslogsconnector"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/otlpjsonconnector"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/roundrobinconnector"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/routingconnector"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/servicegraphconnector"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/signaltometricsconnector"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/slowsqlconnector"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/spanmetricsconnector"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/sumconnector"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/azureauthextension"
@@ -169,17 +165,13 @@ func Components() (otelcol.Factories, error) {
 	connectors := []connector.Factory{
 		failoverconnector.NewFactory(),
 		countconnector.NewFactory(),
-		exceptionsconnector.NewFactory(),
 		forwardconnector.NewFactory(),
-		datadogconnector.NewFactory(),
-		grafanacloudconnector.NewFactory(),
 		metricsaslogsconnector.NewFactory(),
 		otlpjsonconnector.NewFactory(),
 		roundrobinconnector.NewFactory(),
 		routingconnector.NewFactory(),
 		servicegraphconnector.NewFactory(),
 		signaltometricsconnector.NewFactory(),
-		slowsqlconnector.NewFactory(),
 		spanmetricsconnector.NewFactory(),
 		sumconnector.NewFactory(),
 		signozmeterconnector.NewFactory(),

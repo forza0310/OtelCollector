@@ -30,17 +30,13 @@ require (
 	github.com/oklog/ulid v1.3.1
 	github.com/open-telemetry/opamp-go v0.22.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/connector/countconnector v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/connector/datadogconnector v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/connector/exceptionsconnector v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/connector/failoverconnector v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/connector/grafanacloudconnector v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/connector/metricsaslogsconnector v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/connector/otlpjsonconnector v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/connector/roundrobinconnector v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/connector/routingconnector v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/connector/servicegraphconnector v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/connector/signaltometricsconnector v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/connector/slowsqlconnector v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/connector/spanmetricsconnector v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/connector/sumconnector v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/exporter/prometheusexporter v0.144.0
@@ -185,27 +181,9 @@ require (
 	github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/network/armnetwork/v4 v4.3.0 // indirect
 	github.com/AzureAD/microsoft-authentication-library-for-go v1.6.0 // indirect
 	github.com/Code-Hex/go-generics-cache v1.5.1 // indirect
-	github.com/DataDog/datadog-agent/comp/core/tagger/origindetection v0.76.0-devel // indirect
-	github.com/DataDog/datadog-agent/comp/core/tagger/types v0.76.0-devel // indirect
-	github.com/DataDog/datadog-agent/comp/core/tagger/utils v0.76.0-devel // indirect
-	github.com/DataDog/datadog-agent/comp/otelcol/otlp/components/metricsclient v0.76.0-devel // indirect
 	github.com/DataDog/datadog-agent/pkg/obfuscate v0.76.0-devel // indirect
-	github.com/DataDog/datadog-agent/pkg/opentelemetry-mapping-go/otlp/attributes v0.76.0-devel // indirect
-	github.com/DataDog/datadog-agent/pkg/opentelemetry-mapping-go/otlp/metrics v0.76.0-devel // indirect
-	github.com/DataDog/datadog-agent/pkg/proto v0.76.0-devel // indirect
-	github.com/DataDog/datadog-agent/pkg/remoteconfig/state v0.76.0-devel // indirect
-	github.com/DataDog/datadog-agent/pkg/template v0.76.0-devel // indirect
-	github.com/DataDog/datadog-agent/pkg/trace v0.76.0-devel // indirect
-	github.com/DataDog/datadog-agent/pkg/util/hostname/validate v0.76.0-devel // indirect
-	github.com/DataDog/datadog-agent/pkg/util/log v0.76.0-devel // indirect
-	github.com/DataDog/datadog-agent/pkg/util/option v0.76.0-devel // indirect
-	github.com/DataDog/datadog-agent/pkg/util/quantile v0.76.0-devel // indirect
-	github.com/DataDog/datadog-agent/pkg/util/scrubber v0.76.0-devel // indirect
-	github.com/DataDog/datadog-agent/pkg/version v0.76.0-devel // indirect
 	github.com/DataDog/datadog-go/v5 v5.8.2 // indirect
 	github.com/DataDog/go-sqllexer v0.1.10 // indirect
-	github.com/DataDog/go-tuf v1.1.1-0.5.2 // indirect
-	github.com/DataDog/sketches-go v1.4.7 // indirect
 	github.com/GehirnInc/crypt v0.0.0-20230320061759-8cc1b52080c5 // indirect
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/detectors/gcp v1.30.0 // indirect
 	github.com/Microsoft/go-winio v0.6.2 // indirect
@@ -236,7 +214,6 @@ require (
 	github.com/bytedance/gopkg v0.1.3 // indirect
 	github.com/bytedance/sonic/loader v0.3.0 // indirect
 	github.com/cenkalti/backoff/v5 v5.0.3 // indirect
-	github.com/cihub/seelog v0.0.0-20170130134532-f561c5e57575 // indirect
 	github.com/cloudwego/base64x v0.1.6 // indirect
 	github.com/cncf/xds/go v0.0.0-20251022180443-0feb69152e9f // indirect
 	github.com/containerd/errdefs v1.0.0 // indirect
@@ -358,7 +335,6 @@ require (
 	github.com/open-telemetry/opentelemetry-collector-contrib/internal/sharedcomponent v0.144.0 // indirect
 	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/batchpersignal v0.144.0 // indirect
 	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/core/xidutils v0.144.0 // indirect
-	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/datadog v0.144.0 // indirect
 	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/experimentalmetricmetadata v0.144.0 // indirect
 	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/resourcetotelemetry v0.144.0 // indirect
 	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/sampling v0.144.0 // indirect
@@ -373,8 +349,7 @@ require (
 	github.com/oschwald/maxminddb-golang/v2 v2.1.1 // indirect
 	github.com/outcaste-io/ristretto v0.2.3 // indirect
 	github.com/ovh/go-ovh v1.9.0 // indirect
-	github.com/patrickmn/go-cache v2.1.0+incompatible // indirect
-	github.com/philhofer/fwd v1.2.0 // indirect
+	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c // indirect
 	github.com/planetscale/vtprotobuf v0.6.1-0.20240319094008-0393e58bdf10 // indirect
 	github.com/prometheus/alertmanager v0.30.0 // indirect
@@ -390,7 +365,6 @@ require (
 	github.com/sagikazarmark/locafero v0.4.0 // indirect
 	github.com/sagikazarmark/slog-shim v0.1.0 // indirect
 	github.com/scaleway/scaleway-sdk-go v1.0.0-beta.36 // indirect
-	github.com/secure-systems-lab/go-securesystemslib v0.9.0 // indirect
 	github.com/segmentio/asm v1.2.0 // indirect
 	github.com/shirou/gopsutil/v4 v4.25.12 // indirect
 	github.com/shurcooL/httpfs v0.0.0-20230704072500-f1e31cf0ba5c // indirect
@@ -399,7 +373,6 @@ require (
 	github.com/tg123/go-htpasswd v1.2.4 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect
-	github.com/tinylib/msgp v1.6.3 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/twmb/murmur3 v1.1.8 // indirect
 	github.com/ua-parser/uap-go v0.0.0-20240611065828-3a4781585db6 // indirect
@@ -504,7 +477,6 @@ require (
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
 	github.com/gogo/googleapis v1.4.1 // indirect
-	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.4 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
