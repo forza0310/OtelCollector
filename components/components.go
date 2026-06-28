@@ -123,8 +123,6 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/k8sclusterreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/k8seventsreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/k8sobjectsreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kafkametricsreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kafkareceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kubeletstatsreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/netflowreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/nsxtreceiver"
@@ -136,13 +134,10 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/pprofreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusremotewritereceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/pulsarreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/rabbitmqreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/receivercreator"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/redfishreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/simpleprometheusreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/snmpreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/solacereceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/sshcheckreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/systemdreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/tcpcheckreceiver"
@@ -203,8 +198,6 @@ func Components() (otelcol.Factories, error) {
 		k8sclusterreceiver.NewFactory(),
 		k8seventsreceiver.NewFactory(),
 		k8sobjectsreceiver.NewFactory(),
-		kafkametricsreceiver.NewFactory(),
-		kafkareceiver.NewFactory(),
 		kubeletstatsreceiver.NewFactory(),
 		nsxtreceiver.NewFactory(),
 		osqueryreceiver.NewFactory(),
@@ -213,12 +206,9 @@ func Components() (otelcol.Factories, error) {
 		podmanreceiver.NewFactory(),
 		prometheusreceiver.NewFactory(),
 		prometheusremotewritereceiver.NewFactory(),
-		pulsarreceiver.NewFactory(),
-		rabbitmqreceiver.NewFactory(),
 		receivercreator.NewFactory(),
 		simpleprometheusreceiver.NewFactory(),
 		snmpreceiver.NewFactory(),
-		solacereceiver.NewFactory(),
 		sshcheckreceiver.NewFactory(),
 		webhookeventreceiver.NewFactory(),
 		windowsperfcountersreceiver.NewFactory(),

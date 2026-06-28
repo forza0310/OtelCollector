@@ -2245,10 +2245,6 @@ github.com/open-telemetry/opentelemetry-collector-contrib/receiver/k8seventsrece
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/k8seventsreceiver v0.144.0/go.mod h1:2r0WbFgx7GMcF1OYr+Xi4ex4q8pCCeND0K9S4lsXdew=
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/k8sobjectsreceiver v0.144.0 h1:dhUjoTH5TyOkKUDWIh/tnRxSNbKrukZSpwUGR6sYVOI=
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/k8sobjectsreceiver v0.144.0/go.mod h1:eK9X2NrTg3ysb7DqnFHiK/tRIYkKJ1Q8M/gnJgx2MXg=
-github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kafkametricsreceiver v0.144.0 h1:mE82tepfV7yf+AGCbswnxB1jGaHbtV1AND5h49ipJNg=
-github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kafkametricsreceiver v0.144.0/go.mod h1:b2BcffrWClda4Nxjjole0c0BqltoWZKQXGLpthDgIIM=
-github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kafkareceiver v0.144.0 h1:9bqA7+/2/h/X+ltDx6S+m2CHoXtbeRxBFS/uoileJuw=
-github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kafkareceiver v0.144.0/go.mod h1:PVM7Y1BwcxVLNNJUOkPVDB1ZzK9ct1NUv+gDZj0l2zc=
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kubeletstatsreceiver v0.144.0 h1:s8wZP1zI7AdGRCQ6leBv3IoYr+7SfreNkBMpnUBpPMU=
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kubeletstatsreceiver v0.144.0/go.mod h1:jOFUkzwhXKsYH0opfLU2BzPWetbWr63/9k8gCuJws+k=
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/netflowreceiver v0.144.0 h1:uQmOacRUqEIBMjFOhiBDbLolCVEFZ18/fmUhO7iVGfY=
@@ -2271,10 +2267,6 @@ github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusrec
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusreceiver v0.144.0/go.mod h1:GOQNM30eSQR7zy9rxV27hcgl+HC8CumUIgkI2d0FYoA=
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusremotewritereceiver v0.144.0 h1:Zx7jvGIMhZnQScjwQCO9pqlTE1g7X+R7HZM62LCcoKA=
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusremotewritereceiver v0.144.0/go.mod h1:dK0GQ9scfciTtbEae7/r1fqKc1Oczxnq23wMcSWTxtQ=
-github.com/open-telemetry/opentelemetry-collector-contrib/receiver/pulsarreceiver v0.144.0 h1:ohjKIsVRa/HZVMDS7R01Gy1/3ihA7eXVpeXEn2M4ZlI=
-github.com/open-telemetry/opentelemetry-collector-contrib/receiver/pulsarreceiver v0.144.0/go.mod h1:bTsnnriV0BxFRSePY1IlY6P2GVKAsiaitWDtOvGV0zw=
-github.com/open-telemetry/opentelemetry-collector-contrib/receiver/rabbitmqreceiver v0.144.0 h1:DD3ORGQSYx9+rpfEYUBhoEuv07A4VmONf3h1A/4i0xs=
-github.com/open-telemetry/opentelemetry-collector-contrib/receiver/rabbitmqreceiver v0.144.0/go.mod h1:mBXKLxjPTZ32gqiiBU9XILV74g81c3Et1G1CRCsRRo4=
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/receivercreator v0.144.0 h1:U3/YLy7vtqsRwqCz3CuQtXr6dggqQn7gPugXc5rQ2Fc=
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/receivercreator v0.144.0/go.mod h1:B/kHP5R8LArk9QEzmh62RTE7Agmekiht1w0YRQkqzVE=
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/redfishreceiver v0.144.0 h1:x7SJamd/LLVsYYFSD3NPFVo8+7P8IUit09vPdzUrlfE=
@@ -2283,8 +2275,6 @@ github.com/open-telemetry/opentelemetry-collector-contrib/receiver/simpleprometh
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/simpleprometheusreceiver v0.144.0/go.mod h1:ChCHa91Qq2WON/0mnXu22J7bRpa/E/pu9aK+6gjXStg=
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/snmpreceiver v0.144.0 h1:0KXKxmD3+ENfGYyYFw2p2NDDqvf0llXartqoi0Il1yM=
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/snmpreceiver v0.144.0/go.mod h1:UvXlKGOieRqXosKe0it7qdiCMBlIK/sJiRoKXTpigck=
-github.com/open-telemetry/opentelemetry-collector-contrib/receiver/solacereceiver v0.144.0 h1:72MuSMSGGWXKF/AQTAq1eCSVDDyokNH8KSohdUCM2EE=
-github.com/open-telemetry/opentelemetry-collector-contrib/receiver/solacereceiver v0.144.0/go.mod h1:1v5X9W/wMskvKiJJCl5487wwr7+i2o0w0Mx6H1fED1U=
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/sshcheckreceiver v0.144.0 h1:vI19oYD5yeqEvVIWQQmnukA00MGvJrvA6ohS96wFMSs=
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/sshcheckreceiver v0.144.0/go.mod h1:hWLt++vpWyxAxPawcDivNqYW5KVo7oCL36T2zKlNf74=
 github.com/open-telemetry/opentelemetry-collector-contrib/receiver/systemdreceiver v0.144.0 h1:Gdi/BkawJNlaJiuWb/eJHKJ0CUHtFlWBbm8Mma9ZQdU=

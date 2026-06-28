@@ -139,8 +139,6 @@ require (
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/k8sclusterreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/k8seventsreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/k8sobjectsreceiver v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kafkametricsreceiver v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kafkareceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kubeletstatsreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/netflowreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/nsxtreceiver v0.144.0
@@ -152,13 +150,10 @@ require (
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/pprofreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusremotewritereceiver v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/pulsarreceiver v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/rabbitmqreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/receivercreator v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/redfishreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/simpleprometheusreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/snmpreceiver v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/solacereceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/sshcheckreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/systemdreceiver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/tcpcheckreceiver v0.144.0
