@@ -91,44 +91,20 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/tailsamplingprocessor"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/transformprocessor"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/unrollprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/chronyreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/ciscoosreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/dockerstatsreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/envoyalsreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/expvarreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/filestatsreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/githubreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/gitlabreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/hostmetricsreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/httpcheckreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/icmpcheckreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/jmxreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/k8sclusterreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/k8seventsreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/k8sobjectsreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kubeletstatsreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/netflowreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/nsxtreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/ntpreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/osqueryreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/otelarrowreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/otlpjsonfilereceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/podmanreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/pprofreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusremotewritereceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/receivercreator"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/redfishreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/simpleprometheusreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/snmpreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/sshcheckreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/systemdreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/tcpcheckreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/tlscheckreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/webhookeventreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/windowsperfcountersreceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/windowsservicereceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/yanggrpcreceiver"
 	"go.opentelemetry.io/collector/connector"
 	"go.opentelemetry.io/collector/connector/forwardconnector"
 	"go.opentelemetry.io/collector/exporter"
@@ -153,14 +129,9 @@ func Components() (otelcol.Factories, error) {
 	extensions := []extension.Factory{}
 
 	receivers := []receiver.Factory{
-		chronyreceiver.NewFactory(),
 		clickhousesystemtablesreceiver.NewFactory(),
 		dockerstatsreceiver.NewFactory(),
-		expvarreceiver.NewFactory(),
-		filestatsreceiver.NewFactory(),
-		githubreceiver.NewFactory(),
 		hostmetricsreceiver.NewFactory(),
-		httpcheckreceiver.NewFactory(),
 		httplogreceiver.NewFactory(),
 		jmxreceiver.NewFactory(),
 		k8sclusterreceiver.NewFactory(),
@@ -168,31 +139,12 @@ func Components() (otelcol.Factories, error) {
 		k8sobjectsreceiver.NewFactory(),
 		kubeletstatsreceiver.NewFactory(),
 		nsxtreceiver.NewFactory(),
-		osqueryreceiver.NewFactory(),
-		otelarrowreceiver.NewFactory(),
 		otlpjsonfilereceiver.NewFactory(),
 		podmanreceiver.NewFactory(),
 		prometheusreceiver.NewFactory(),
 		prometheusremotewritereceiver.NewFactory(),
 		receivercreator.NewFactory(),
 		simpleprometheusreceiver.NewFactory(),
-		snmpreceiver.NewFactory(),
-		sshcheckreceiver.NewFactory(),
-		webhookeventreceiver.NewFactory(),
-		windowsperfcountersreceiver.NewFactory(),
-		ciscoosreceiver.NewFactory(),
-		envoyalsreceiver.NewFactory(),
-		gitlabreceiver.NewFactory(),
-		icmpcheckreceiver.NewFactory(),
-		netflowreceiver.NewFactory(),
-		ntpreceiver.NewFactory(),
-		pprofreceiver.NewFactory(),
-		redfishreceiver.NewFactory(),
-		systemdreceiver.NewFactory(),
-		tcpcheckreceiver.NewFactory(),
-		tlscheckreceiver.NewFactory(),
-		windowsservicereceiver.NewFactory(),
-		yanggrpcreceiver.NewFactory(),
 		signozkafkareceiver.NewFactory(),
 		signozawsfirehosereceiver.NewFactory(),
 	}
