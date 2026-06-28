@@ -1,0 +1,33 @@
+# Minimal golangci-lint v2 config used by `make lint` and CI.
+# Tuned to be conservative for this large fork: enables only the default
+# linters plus a handful of widely-accepted ones. Adjust as the project
+# matures.
+version: "2"
+
+run:
+  timeout: 10m
+  tests: true
+  allow-parallel-runners: true
+
+linters:
+  default: standard
+  enable:
+    - gosec
+    - misspell
+    - unconvert
+    - unparam
+  exclusions:
+    rules:
+      # Generated and vendored code is out of our control.
+      - path: ".*generated.*\\.go$"
+        linters:
+          - gosec
+          - unparam
+          - unconvert
+      - path: "_test\\.go$"
+        linters:
+          - gosec
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0

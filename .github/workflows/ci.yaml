@@ -1,39 +1,78 @@
 name: ci
 
+# Replacement for the original signoz/primus.workflows-based CI.
+# The original pipeline delegated to `make go-test|go-fmt|go-lint` defined
+# inside the private signoz/primus repo. This project's own Makefile already
+# defines equivalent targets (`test`, `fmt`, `lint`), so we just call those
+# here to keep CI behaviour identical to a local `make test-and-lint` run.
+
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
-  pull_request_target:
-    types:
-      - labeled
+
+permissions:
+  contents: read
+
+env:
+  GO_VERSION: "1.24"
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
-  test:
-    if: |
-      (github.event_name == 'pull_request' && ! github.event.pull_request.head.repo.fork && github.event.pull_request.user.login != 'dependabot[bot]' && ! contains(github.event.pull_request.labels.*.name, 'safe-to-test')) ||
-      (github.event_name == 'pull_request_target' && contains(github.event.pull_request.labels.*.name, 'safe-to-test'))
-    uses: signoz/primus.workflows/.github/workflows/go-test.yaml@main
-    secrets: inherit
-    with:
-      PRIMUS_REF: main
-      GO_VERSION: 1.24
-      GO_TEST_CONTEXT: ./...
   fmt:
-    if: |
-      (github.event_name == 'pull_request' && ! github.event.pull_request.head.repo.fork && github.event.pull_request.user.login != 'dependabot[bot]' && ! contains(github.event.pull_request.labels.*.name, 'safe-to-test')) ||
-      (github.event_name == 'pull_request_target' && contains(github.event.pull_request.labels.*.name, 'safe-to-test'))
-    uses: signoz/primus.workflows/.github/workflows/go-fmt.yaml@main
-    secrets: inherit
-    with:
-      PRIMUS_REF: main
-      GO_VERSION: 1.24
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+      # The Makefile `fmt` target runs `gofmt -w`, which modifies files. In
+      # CI we want a read-only check, so use `-l` to list non-compliant files
+      # and fail if any are reported. Mirrors the intent of primus' go-fmt.
+      - name: gofmt
+        run: |
+          out="$(gofmt -e -s -l .)"
+          if [[ -n "${out}" ]]; then
+            echo "::error::The following files are not gofmt-clean:"
+            echo "${out}"
+            exit 1
+          fi
+
   lint:
-    if: |
-      (github.event_name == 'pull_request' && ! github.event.pull_request.head.repo.fork && github.event.pull_request.user.login != 'dependabot[bot]' && ! contains(github.event.pull_request.labels.*.name, 'safe-to-test')) ||
-      (github.event_name == 'pull_request_target' && contains(github.event.pull_request.labels.*.name, 'safe-to-test'))
-    uses: signoz/primus.workflows/.github/workflows/go-lint.yaml@main
-    secrets: inherit
-    with:
-      PRIMUS_REF: main
-      GO_VERSION: 1.24
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+      # The official action keeps its own analysis cache under
+      # ~/.cache/golangci-lint, so reruns only re-check changed packages.
+      # Version + config are taken from the Makefile / .golangci.yml.
+      - name: lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: v2.6.0
+          args: --timeout=10m
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+      # GitHub-hosted ubuntu-latest is 4 vCPU. -p caps package-level
+      # parallelism, -parallel caps t.Parallel() inside a package.
+      # Combined with setup-go's build cache this typically halves CI
+      # wall time after the first run.
+      - name: test
+        run: go test -count=1 -race -cover -p 4 -parallel 4 ./...
