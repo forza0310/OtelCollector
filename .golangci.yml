@@ -1,7 +1,13 @@
 # Minimal golangci-lint v2 config used by `make lint` and CI.
-# Tuned to be conservative for this large fork: enables only the default
-# linters plus a handful of widely-accepted ones. Adjust as the project
-# matures.
+#
+# Philosophy: this is a large fork of SigNoz' otel-collector. We want lint
+# to catch *real* issues we introduce, not flag every legacy pattern in
+# upstream code. So we keep the high-signal linters (govet, staticcheck,
+# ineffassign, unused, gosimple — all in `standard`) and explicitly drop
+# the two that produce dozens of false positives on the upstream codebase:
+#   - errcheck: unchecked defer Close() everywhere
+#   - gosec:    int->uint conversions, md5 hashes for non-crypto IDs, etc.
+# Re-enable them per-package once the offending code has been cleaned up.
 version: "2"
 
 run:
@@ -11,8 +17,9 @@ run:
 
 linters:
   default: standard
+  disable:
+    - errcheck
   enable:
-    - gosec
     - misspell
     - unconvert
     - unparam
@@ -21,12 +28,10 @@ linters:
       # Generated and vendored code is out of our control.
       - path: ".*generated.*\\.go$"
         linters:
-          - gosec
           - unparam
           - unconvert
       - path: "_test\\.go$"
-        linters:
-          - gosec
+        linters: []
 
 issues:
   max-issues-per-linter: 0
