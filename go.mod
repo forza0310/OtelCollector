@@ -9,7 +9,6 @@ require (
 	github.com/ClickHouse/clickhouse-go/v2 v2.36.0
 	github.com/DATA-DOG/go-sqlmock v1.5.2
 	github.com/IBM/sarama v1.46.3
-	github.com/Shopify/sarama v1.38.1
 	github.com/apache/thrift v0.22.0
 	github.com/aws/aws-sdk-go v1.55.8
 	github.com/bytedance/sonic v1.14.1
@@ -86,7 +85,6 @@ require (
 	github.com/vjeantet/grok v1.0.1
 	github.com/xdg-go/scram v1.2.0
 	go.opencensus.io v0.24.0
-	go.opentelemetry.io/collector/client v1.50.0
 	go.opentelemetry.io/collector/component v1.50.0
 	go.opentelemetry.io/collector/component/componentstatus v0.144.0
 	go.opentelemetry.io/collector/component/componenttest v0.144.0
@@ -105,7 +103,6 @@ require (
 	go.opentelemetry.io/collector/connector/connectortest v0.144.0
 	go.opentelemetry.io/collector/connector/forwardconnector v0.119.0
 	go.opentelemetry.io/collector/consumer v1.50.0
-	go.opentelemetry.io/collector/consumer/consumererror v0.144.0
 	go.opentelemetry.io/collector/consumer/consumertest v0.144.0
 	go.opentelemetry.io/collector/exporter v1.50.0
 	go.opentelemetry.io/collector/exporter/debugexporter v0.144.0
@@ -355,6 +352,7 @@ require (
 	go.mongodb.org/mongo-driver v1.17.6 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/collector v0.144.0 // indirect
+	go.opentelemetry.io/collector/client v1.50.0 // indirect
 	go.opentelemetry.io/collector/config/configauth v1.50.0 // indirect
 	go.opentelemetry.io/collector/config/configcompression v1.50.0 // indirect
 	go.opentelemetry.io/collector/config/configmiddleware v1.50.0 // indirect
@@ -362,6 +360,7 @@ require (
 	go.opentelemetry.io/collector/confmap/provider/httpprovider v1.50.0 // indirect
 	go.opentelemetry.io/collector/confmap/provider/yamlprovider v1.50.0 // indirect
 	go.opentelemetry.io/collector/connector/xconnector v0.144.0 // indirect
+	go.opentelemetry.io/collector/consumer/consumererror v0.144.0 // indirect
 	go.opentelemetry.io/collector/consumer/consumererror/xconsumererror v0.144.0 // indirect
 	go.opentelemetry.io/collector/consumer/xconsumer v0.144.0 // indirect
 	go.opentelemetry.io/collector/exporter/exporterhelper/xexporterhelper v0.144.0 // indirect
