@@ -19,9 +19,6 @@ import (
 	"github.com/SigNoz/signoz-otel-collector/receiver/signozawsfirehosereceiver"
 	"github.com/SigNoz/signoz-otel-collector/receiver/signozkafkareceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/countconnector"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/failoverconnector"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/metricsaslogsconnector"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/otlpjsonconnector"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/roundrobinconnector"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/routingconnector"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/servicegraphconnector"
@@ -32,7 +29,6 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/bearertokenauthextension"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/healthcheckextension"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/oauth2clientauthextension"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/dockerobserver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/hostobserver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/k8sobserver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/oidcauthextension"
@@ -42,9 +38,7 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/cumulativetodeltaprocessor"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/deltatocumulativeprocessor"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/deltatorateprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/dnslookupprocessor"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/filterprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/geoipprocessor"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/groupbyattrsprocessor"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/groupbytraceprocessor"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/k8sattributesprocessor"
@@ -120,9 +114,7 @@ func Components() (otelcol.Factories, error) {
 		cumulativetodeltaprocessor.NewFactory(),
 		deltatorateprocessor.NewFactory(),
 		deltatocumulativeprocessor.NewFactory(),
-		dnslookupprocessor.NewFactory(),
 		filterprocessor.NewFactory(),
-		geoipprocessor.NewFactory(),
 		groupbyattrsprocessor.NewFactory(),
 		groupbytraceprocessor.NewFactory(),
 		k8sattributesprocessor.NewFactory(),
@@ -145,11 +137,8 @@ func Components() (otelcol.Factories, error) {
 	}
 
 	connectors := []connector.Factory{
-		failoverconnector.NewFactory(),
 		countconnector.NewFactory(),
 		forwardconnector.NewFactory(),
-		metricsaslogsconnector.NewFactory(),
-		otlpjsonconnector.NewFactory(),
 		roundrobinconnector.NewFactory(),
 		routingconnector.NewFactory(),
 		servicegraphconnector.NewFactory(),
@@ -189,7 +178,6 @@ func CoreComponents(
 		extensions,
 		basicauthextension.NewFactory(),
 		bearertokenauthextension.NewFactory(),
-		dockerobserver.NewFactory(),
 		filestorage.NewFactory(),
 		hostobserver.NewFactory(),
 		k8sobserver.NewFactory(),

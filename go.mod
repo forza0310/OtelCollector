@@ -30,9 +30,6 @@ require (
 	github.com/oklog/ulid v1.3.1
 	github.com/open-telemetry/opamp-go v0.22.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/connector/countconnector v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/connector/failoverconnector v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/connector/metricsaslogsconnector v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/connector/otlpjsonconnector v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/connector/roundrobinconnector v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/connector/routingconnector v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/connector/servicegraphconnector v0.144.0
@@ -44,7 +41,6 @@ require (
 	github.com/open-telemetry/opentelemetry-collector-contrib/extension/bearertokenauthextension v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/extension/healthcheckextension v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/extension/oauth2clientauthextension v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/dockerobserver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/hostobserver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/k8sobserver v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/extension/oidcauthextension v0.144.0
@@ -60,9 +56,7 @@ require (
 	github.com/open-telemetry/opentelemetry-collector-contrib/processor/cumulativetodeltaprocessor v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/processor/deltatocumulativeprocessor v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/processor/deltatorateprocessor v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/processor/dnslookupprocessor v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/processor/filterprocessor v0.144.0
-	github.com/open-telemetry/opentelemetry-collector-contrib/processor/geoipprocessor v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/processor/groupbyattrsprocessor v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/processor/groupbytraceprocessor v0.144.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/processor/k8sattributesprocessor v0.144.0
@@ -312,7 +306,6 @@ require (
 	github.com/open-telemetry/opentelemetry-collector-contrib/internal/aws/ecsutil v0.144.0 // indirect
 	github.com/open-telemetry/opentelemetry-collector-contrib/internal/common v0.144.0 // indirect
 	github.com/open-telemetry/opentelemetry-collector-contrib/internal/coreinternal v0.144.0 // indirect
-	github.com/open-telemetry/opentelemetry-collector-contrib/internal/docker v0.144.0 // indirect
 	github.com/open-telemetry/opentelemetry-collector-contrib/internal/exp/metrics v0.144.0 // indirect
 	github.com/open-telemetry/opentelemetry-collector-contrib/internal/filter v0.144.0 // indirect
 	github.com/open-telemetry/opentelemetry-collector-contrib/internal/gopsutilenv v0.144.0 // indirect
@@ -334,8 +327,6 @@ require (
 	github.com/opencontainers/image-spec v1.1.1 // indirect
 	github.com/openshift/api v3.9.0+incompatible // indirect
 	github.com/openshift/client-go v0.0.0-20251015124057-db0dee36e235 // indirect
-	github.com/oschwald/geoip2-golang/v2 v2.1.0 // indirect
-	github.com/oschwald/maxminddb-golang/v2 v2.1.1 // indirect
 	github.com/outcaste-io/ristretto v0.2.3 // indirect
 	github.com/ovh/go-ovh v1.9.0 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
