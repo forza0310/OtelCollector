@@ -4,50 +4,21 @@ import (
 	"github.com/SigNoz/signoz-otel-collector/connectors/signozmeterconnector"
 	"github.com/SigNoz/signoz-otel-collector/exporter/clickhouselogsexporter"
 	"github.com/SigNoz/signoz-otel-collector/exporter/clickhousetracesexporter"
-	"github.com/SigNoz/signoz-otel-collector/exporter/jsontypeexporter"
 	"github.com/SigNoz/signoz-otel-collector/exporter/metadataexporter"
 	"github.com/SigNoz/signoz-otel-collector/exporter/signozclickhousemeter"
 	"github.com/SigNoz/signoz-otel-collector/exporter/signozclickhousemetrics"
-	signozhealthcheckextension "github.com/SigNoz/signoz-otel-collector/extension/healthcheckextension"
 	_ "github.com/SigNoz/signoz-otel-collector/pkg/parser/grok"
 	"github.com/SigNoz/signoz-otel-collector/processor/signozlogspipelineprocessor"
 	"github.com/SigNoz/signoz-otel-collector/processor/signozspanmetricsprocessor"
 	"github.com/SigNoz/signoz-otel-collector/processor/signoztailsampler"
-	"github.com/SigNoz/signoz-otel-collector/processor/signoztransformprocessor"
 	"github.com/SigNoz/signoz-otel-collector/receiver/clickhousesystemtablesreceiver"
 	"github.com/SigNoz/signoz-otel-collector/receiver/httplogreceiver"
 	"github.com/SigNoz/signoz-otel-collector/receiver/signozawsfirehosereceiver"
 	"github.com/SigNoz/signoz-otel-collector/receiver/signozkafkareceiver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/routingconnector"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/servicegraphconnector"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/signaltometricsconnector"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/connector/spanmetricsconnector"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/basicauthextension"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/bearertokenauthextension"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/healthcheckextension"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/hostobserver"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/k8sobserver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/pprofextension"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/storage/filestorage"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/attributesprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/cumulativetodeltaprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/deltatocumulativeprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/deltatorateprocessor"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/filterprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/groupbyattrsprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/k8sattributesprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/logdedupprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/logstransformprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/metricsgenerationprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/metricstarttimeprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/metricstransformprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/probabilisticsamplerprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/redactionprocessor"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/resourcedetectionprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/resourceprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/spanprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/tailsamplingprocessor"
-	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/transformprocessor"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/hostmetricsreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/k8sclusterreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/k8seventsreceiver"
@@ -56,12 +27,9 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusremotewritereceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/receivercreator"
 	"go.opentelemetry.io/collector/connector"
-	"go.opentelemetry.io/collector/connector/forwardconnector"
 	"go.opentelemetry.io/collector/exporter"
 	"go.opentelemetry.io/collector/exporter/debugexporter"
 	"go.opentelemetry.io/collector/exporter/nopexporter"
-	"go.opentelemetry.io/collector/exporter/otlpexporter"
-	"go.opentelemetry.io/collector/exporter/otlphttpexporter"
 	"go.opentelemetry.io/collector/extension"
 	"go.opentelemetry.io/collector/extension/zpagesextension"
 	"go.opentelemetry.io/collector/otelcol"
@@ -97,44 +65,20 @@ func Components() (otelcol.Factories, error) {
 		signozclickhousemetrics.NewFactory(),
 		clickhousetracesexporter.NewFactory(),
 		debugexporter.NewFactory(),
-		jsontypeexporter.NewFactory(),
 		metadataexporter.NewFactory(),
 		nopexporter.NewFactory(),
 		signozclickhousemeter.NewFactory(),
 	}
 
 	processors := []processor.Factory{
-		attributesprocessor.NewFactory(),
-		cumulativetodeltaprocessor.NewFactory(),
-		deltatorateprocessor.NewFactory(),
-		deltatocumulativeprocessor.NewFactory(),
 		filterprocessor.NewFactory(),
-		groupbyattrsprocessor.NewFactory(),
-		k8sattributesprocessor.NewFactory(),
-		logdedupprocessor.NewFactory(),
-		logstransformprocessor.NewFactory(),
-		metricsgenerationprocessor.NewFactory(),
-		metricstransformprocessor.NewFactory(),
-		metricstarttimeprocessor.NewFactory(),
-		probabilisticsamplerprocessor.NewFactory(),
-		redactionprocessor.NewFactory(),
 		resourcedetectionprocessor.NewFactory(),
-		resourceprocessor.NewFactory(),
 		signozspanmetricsprocessor.NewFactory(),
-		spanprocessor.NewFactory(),
-		tailsamplingprocessor.NewFactory(),
-		transformprocessor.NewFactory(),
 		signoztailsampler.NewFactory(),
-		signoztransformprocessor.NewFactory(),
 		signozlogspipelineprocessor.NewFactory(),
 	}
 
 	connectors := []connector.Factory{
-		forwardconnector.NewFactory(),
-		routingconnector.NewFactory(),
-		servicegraphconnector.NewFactory(),
-		signaltometricsconnector.NewFactory(),
-		spanmetricsconnector.NewFactory(),
 		signozmeterconnector.NewFactory(),
 	}
 
@@ -166,14 +110,8 @@ func CoreComponents(
 
 	extensions = append(
 		extensions,
-		basicauthextension.NewFactory(),
-		bearertokenauthextension.NewFactory(),
-		filestorage.NewFactory(),
-		hostobserver.NewFactory(),
-		k8sobserver.NewFactory(),
 		healthcheckextension.NewFactory(),
 		pprofextension.NewFactory(),
-		signozhealthcheckextension.NewFactory(),
 		zpagesextension.NewFactory(),
 	)
 	extensionsMap, err := otelcol.MakeFactoryMap(extensions...)
@@ -191,11 +129,6 @@ func CoreComponents(
 		errs = append(errs, err)
 	}
 
-	exporters = append(
-		exporters,
-		otlpexporter.NewFactory(),
-		otlphttpexporter.NewFactory(),
-	)
 	exportersMap, err := otelcol.MakeFactoryMap(exporters...)
 	if err != nil {
 		errs = append(errs, err)
