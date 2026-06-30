@@ -102,42 +102,6 @@ jobs:
             OS=linux
             APT_MIRROR=deb.debian.org
 
-  signoz-schema-migrator:
-    needs: prepare
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
-        with:
-          go-version: ${{ env.GO_VERSION }}
-      - name: build-binaries
-        run: |
-          mkdir -p target/linux-amd64
-          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
-            go build -o target/linux-amd64/signoz-schema-migrator ./cmd/signozschemamigrator
-      - uses: docker/setup-buildx-action@v3
-      - name: ghcr-login
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - name: build-and-push
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: ./cmd/signozschemamigrator/Dockerfile.multi-arch
-          platforms: linux/amd64
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ needs.prepare.outputs.owner_lc }}/signoz-schema-migrator:staging-${{ needs.prepare.outputs.version }}
-          build-args: |
-            DEBIAN_SHA=${{ needs.prepare.outputs.debian_sha }}
-            OS=linux
-            APT_MIRROR=deb.debian.org
-
   # NOTE: the original pipeline also triggered a downstream `releaser` event in
   # `charts-saas-v3-staging` via signoz/primus.workflows. That step required
   # the SigNoz GitHub App tokens which are not available outside SigNoz, so it

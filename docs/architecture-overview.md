@@ -115,7 +115,7 @@ ReportsEffectiveConfig | ReportsHealth
 
 ### Schema 同步（不是运行时通信，但属于 collector ↔ CH 协作）
 
-Collector 镜像还内置了 `signoz-schema-migrator` 二进制（[cmd/signozschemamigrator/main.go](../cmd/signozschemamigrator/main.go)），干 DDL 同步：
+Collector 二进制内置了 schema migrator 引擎（[cmd/signozschemamigrator/schema_migrator/](../cmd/signozschemamigrator/schema_migrator/)，经 [cmd/signozotelcollector/migrate/](../cmd/signozotelcollector/migrate/) 暴露为 `migrate` 子命令），干 DDL 同步：
 
 | 子命令 | 作用 |
 |---|---|

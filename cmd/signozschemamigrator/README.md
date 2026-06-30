@@ -1,6 +1,12 @@
 # Signoz Schema Migrator
 
-This is a tool to manage the ClickHouse schema migrations.
+This is the engine that manages the ClickHouse schema migrations.
+
+> **Note**
+> The standalone `signoz-schema-migrator` binary (and its Docker image) has been
+> removed from this fork. The migration engine in `schema_migrator/` is now run
+> exclusively through the collector's embedded `migrate` subcommand
+> (`signoz-otel-collector migrate ...`). See [Usage](#usage) below.
 
 ## Why we wrote this?
 
@@ -101,90 +107,71 @@ To add a new migration, you need to find the migration file for the data source 
 
 ## Usage
 
-### Supported commands
+The migration engine runs as a subcommand of the collector binary:
+`signoz-otel-collector migrate ...`. It does not expose per-migration `--up`/`--down`
+selectors or a `--dev` flag; each subcommand applies all of the migrations it owns
+and records progress in the `schema_migrations_v2` tracking table so reruns are
+idempotent.
 
-- `sync`
+### Supported subcommands
 
-The sync mode is used to run the migrations in the foreground and block the upgrade until the operations are complete.
+- `migrate bootstrap`
 
-- `async`
+  Creates the databases and the `schema_migrations_v2` tracking table on each
+  ClickHouse database. Run this once before the first `sync`/`async` migration.
 
-The async mode is used to run the migrations in the background and do not block the upgrade.
+- `migrate sync check`
 
+  Reports whether any pending synchronous (lightweight, idempotent, non-mutation)
+  migrations exist. Used as a readiness gate before the collector starts ingesting.
+
+- `migrate sync up`
+
+  Applies the pending synchronous migrations in the foreground and blocks the
+  upgrade until they complete and the DB is in a consistent state.
+
+- `migrate async check`
+
+  Reports whether any pending asynchronous (mutation/heavyweight) migrations exist.
+
+- `migrate async up`
+
+  Applies the pending asynchronous migrations. These run in the background and do
+  not block the upgrade.
+
+- `migrate ready`
+
+  Probes that the ClickHouse connection is reachable.
 
 ### Flags
 
-#### DSN
-
-The DSN is the ClickHouse connection string.
+These ClickHouse connection flags are shared by every `migrate` subcommand:
 
 ```bash
-... --dsn "tcp://localhost:9000" ...
+--clickhouse-dsn          DSN for the clickhouse connection (default "tcp://0.0.0.0:9001")
+--clickhouse-cluster      Name of the clickhouse cluster to connect (default "cluster")
+--clickhouse-replication  Set true if replication is enabled in the cluster (default true)
 ```
 
-#### Up
-
-The up flag is used to specify the migrations to be run.
-
-```bash
-... --up 1,2,3 ...
-```
-
-#### Down
-
-The down flag is used to specify the migrations to be rolled back.
-
-```bash
-... --down 1,2,3 ...
-```
-
-#### Replication
-
-The replication flag is used to specify if the migrations should be run on a specific cluster.
-
-```bash
-... --replication ...
-```
-
-#### Dev
-
-The dev flag is used to specify if the migrations should be run in the development mode.
-
-```bash
-... --dev ...
-```
-
+Each subcommand also accepts a `--timeout` flag bounding that single operation
+(defaults: `bootstrap` 15m, the others 10s).
 
 ### Running the migrator
 
-Add `--dev` flag to run the migrator in the development/local mode.
-
-To run all the up migrations, you can use the following command:
+Bootstrap the databases and tracking tables, then apply all migrations:
 
 ```bash
-go run cmd/signozschemamigrator/main.go sync --cluster-name="cluster" --dsn="tcp://localhost:9000" --replication=true --up=
+signoz-otel-collector migrate bootstrap   --clickhouse-cluster="cluster" --clickhouse-dsn="tcp://localhost:9000" --clickhouse-replication=true
+signoz-otel-collector migrate sync up     --clickhouse-cluster="cluster" --clickhouse-dsn="tcp://localhost:9000" --clickhouse-replication=true
+signoz-otel-collector migrate async up    --clickhouse-cluster="cluster" --clickhouse-dsn="tcp://localhost:9000" --clickhouse-replication=true
 ```
 
-To run all the up & async migrations, you can use the following command:
+Gate the collector startup on the synchronous migrations being applied:
 
 ```bash
-go run cmd/signozschemamigrator/main.go async --cluster-name="cluster" --dsn="tcp://localhost:9000" --replication=true --up=
+signoz-otel-collector migrate sync check  --clickhouse-cluster="cluster" --clickhouse-dsn="tcp://localhost:9000" --clickhouse-replication=true
 ```
 
-To run all the down migrations, you can use the following command:
-
-```bash
-go run cmd/signozschemamigrator/main.go sync --cluster-name="cluster" --dsn="tcp://localhost:9000" --replication=true --down=
-```
-
-To run a specific migration, you can use the following command:
-
-```bash
-go run cmd/signozschemamigrator/main.go sync --cluster-name="cluster" --dsn="tcp://localhost:9000" --replication=true --up=1
-```
-
-To run more than one migration, you can use the following command:
-
-```bash
-go run cmd/signozschemamigrator/main.go sync --cluster-name="cluster" --dsn="tcp://localhost:9000" --replication=true --up=1,2,3
-```
+In a typical deployment a one-shot migrator job runs
+`migrate bootstrap && migrate sync up && migrate async up`, and the collector
+service runs `migrate sync check` before it starts.
