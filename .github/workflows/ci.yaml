@@ -49,6 +49,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # only-new-issues diffs against the base/parent commit, so the
+          # lint job needs full git history (not the default shallow clone).
+          fetch-depth: 0
       - uses: actions/setup-go@v5
         with:
           go-version: ${{ env.GO_VERSION }}
@@ -58,11 +62,16 @@ jobs:
       # Version + config are taken from the Makefile / .golangci.yml.
       # NOTE: golangci-lint v2 requires golangci-lint-action v7 or newer
       # (v6 only supports golangci-lint v1).
+      #
+      # only-new-issues: this is a large fork of upstream SigNoz. We only
+      # want to fail on issues introduced by *our* changes, not the ~100
+      # legacy lint findings already present in imported upstream code.
       - name: lint
         uses: golangci/golangci-lint-action@v7
         with:
           version: v2.6.0
           args: --timeout=10m
+          only-new-issues: true
 
   test:
     runs-on: ubuntu-latest
